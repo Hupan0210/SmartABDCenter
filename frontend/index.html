@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>南来北往 · 智能ABD中控系统</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header style="position: relative;">
+    <h1>南来北往 · 智能ABD中控系统</h1>
+    <div id="currentDeviceStatus" style="position:absolute; top:15px; right:20px; font-size:14px; color:#333;">
+      当前设备：<span id="currentDeviceIp">未连接</span>
+    </div>
+  </header>
+
+  <section id="networkStatus">
+    <h2>网络状态</h2>
+    <p>本机局域网IP地址：<span id="ipAddress">加载中...</span></p>
+  </section>
+
+  <section id="lanDevices">
+    <h2>局域网设备</h2>
+    <button id="scanBtn">扫描局域网设备</button>
+    <div id="deviceList"></div>
+
+    <h3>已开启ADB的设备</h3>
+    <button id="getAdbDevicesBtn">刷新ADB设备列表</button>
+    <div id="adbDeviceList"></div>
+
+    <div style="margin-top: 10px;">
+      <h4>手动输入IP进行ADB连接</h4>
+      <input type="text" id="manualAdbIp" placeholder="如：192.168.3.52:5555" />
+      <button id="manualAdbBtn">连接设备</button>
+    </div>
+  </section>
+
+  <section id="remoteControl">
+    <h2>模拟遥控器</h2>
+    <div class="control-buttons">
+      <button class="ctrl-btn" data-key="确认">确认</button>
+      <button class="ctrl-btn" data-key="返回">返回</button>
+      <button class="ctrl-btn" data-key="音量加">音量+</button>
+      <button class="ctrl-btn" data-key="音量减">音量-</button>
+      <button class="ctrl-btn" data-key="频道加">频道+</button>
+      <button class="ctrl-btn" data-key="频道减">频道-</button>
+      <div class="number-btns">
+        <button class="ctrl-btn" data-key="0">0</button>
+        <button class="ctrl-btn" data-key="1">1</button>
+        <button class="ctrl-btn" data-key="2">2</button>
+        <button class="ctrl-btn" data-key="3">3</button>
+        <button class="ctrl-btn" data-key="4">4</button>
+        <button class="ctrl-btn" data-key="5">5</button>
+        <button class="ctrl-btn" data-key="6">6</button>
+        <button class="ctrl-btn" data-key="7">7</button>
+        <button class="ctrl-btn" data-key="8">8</button>
+        <button class="ctrl-btn" data-key="9">9</button>
+      </div>
+    </div>
+
+    <div>
+      <h4>遥控目标设备（如不填默认使用当前连接）</h4>
+      <input type="text" id="controlDevice" placeholder="192.168.3.52:5555">
+    </div>
+
+    <div class="file-ops">
+      <h3>文件上传 / APK 安装与卸载</h3>
+      <input type="file" id="fileUpload">
+      <button id="uploadBtn">上传文件</button>
+      <br>
+      <input type="text" id="packageName" placeholder="输入要卸载的包名">
+      <button id="uninstallBtn">卸载APK</button>
+    </div>
+
+    <div class="clipboard">
+      <h3>远程剪贴板</h3>
+      <textarea id="clipboardText" placeholder="输入要复制到设备的内容"></textarea>
+      <button id="clipboardBtn">复制到设备</button>
+    </div>
+
+    <div style="margin-top: 30px;">
+      <h3>ADB 终端实时控制台</h3>
+      <label>目标设备 IP：</label>
+      <input type="text" id="consoleDeviceIp" placeholder="输入设备IP" />
+      <button onclick="startConsole()">连接设备终端</button>
+      <div id="terminalOutput" style="margin-top: 10px; background: #000; color: #0f0; height: 300px; overflow-y: auto; padding: 10px; font-family: monospace; white-space: pre-wrap;"></div>
+      <input type="text" id="terminalInput" placeholder="输入命令按回车执行" style="width: 100%; margin-top: 5px;" onkeydown="if(event.key==='Enter'){sendCommand();}" />
+    </div>
+
+    <div style="margin-top: 30px;">
+      <h3>设备实时监控画面</h3>
+      <label>监控设备 IP：</label>
+      <input type="text" id="monitorDeviceIp" placeholder="输入设备 IP" />
+      <button onclick="startMonitor()">开启监控</button>
+      <button onclick="stopMonitor()">关闭监控</button>
+      <br /><br />
+      <img id="monitorStream" src="" style="max-width: 100%; border: 1px solid #999;" />
+    </div>
+  </section>
+
+  <section id="monitoring">
+    <h2>设备截图监控</h2>
+    <button id="monitorToggleBtn">切换监控显示</button>
+    <div id="monitorScreen" style="display:none;">
+      <img id="screenImg" src="" alt="设备画面截图">
+    </div>
+  </section>
+
+  <section>
+    <h2>日志管理</h2>
+    <button onclick="clearLogs()">清空日志</button> <button onclick="clearAllCache()">🧹 一键清理缓存</button>
+    <button onclick="viewLogs()">查看日志内容</button>
+    <div id="logViewer" style="margin-top:10px; background:#f5f5f5; border:1px solid #ccc; padding:10px; height:200px; overflow-y:auto; font-family:monospace; white-space:pre-wrap;"></div>
+  </section>
+
+  <footer>
+    <p style="text-align: center;">开发者：南来北往 &nbsp;&nbsp;&nbsp; 版本号：1.6.8</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+
+</html>

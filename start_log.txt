@@ -1,0 +1,280 @@
+================ Project Start Log ================ 
+Start Time: 2025/04/11 周五  0:23:26.03 
+[Step 1] Checking Node.js environment... 
+Node.js environment OK. 
+[Step 2] Checking npm dependencies... 
+node_modules detected, skipping npm install. 
+[Step 3] Starting backend service... 
+Backend service start command issued. 
+[Step 4] Waiting 5 seconds for backend service to start... 
+[Step 5] Checking ADB status... 
+Android Debug Bridge version 1.0.41
+Version 35.0.2-12147458
+Installed as C:\platform-tools\scrcpy-win64-v3.2\adb.exe
+Running on Windows 10.0.22631
+ADB is available. 
+[Step 6] Opening default browser to http://localhost:3000 ... 
+Browser opened. 
+========================================== 
+================ Project Stop Log ================ 
+Stop Time: 2025/04/11 周五  0:52:16.37 
+[Step 1] Attempting to close backend service window... 
+
+信息: 没有运行的带有指定标准的任务。
+Backend service window closed successfully. 
+[Step 2] Checking for processes listening on port 3000 and attempting to close them... 
+[Step 3] Project stop operations completed. 
+================ Project Start Log ================ 
+Start Time: 2025/04/11 周五  0:52:21.54 
+[Step 1] Checking Node.js environment... 
+Node.js environment OK. 
+[Step 2] Checking npm dependencies... 
+node_modules detected, skipping npm install. 
+[Step 3] Starting backend service... 
+Backend service start command issued. 
+[Step 4] Waiting 5 seconds for backend service to start... 
+[Step 5] Checking ADB status... 
+Android Debug Bridge version 1.0.41
+Version 35.0.2-12147458
+Installed as C:\platform-tools\scrcpy-win64-v3.2\adb.exe
+Running on Windows 10.0.22631
+ADB is available. 
+[Step 6] Opening default browser to http://localhost:3000 ... 
+Browser opened. 
+========================================== 
+================ Project Start Log ================ 
+Start Time: 2025/04/11 周五  1:06:29.70 
+[Step 1] Checking Node.js environment... 
+Node.js environment OK. 
+[Step 2] Checking npm dependencies... 
+node_modules detected, skipping npm install. 
+[Step 3] Starting backend service... 
+Backend service start command issued. 
+[Step 4] Waiting 5 seconds for backend service to start... 
+[Step 5] Checking ADB status... 
+Android Debug Bridge version 1.0.41
+Version 35.0.2-12147458
+Installed as C:\platform-tools\scrcpy-win64-v3.2\adb.exe
+Running on Windows 10.0.22631
+ADB is available. 
+[Step 6] Opening default browser to http://localhost:3000 ... 
+Browser opened. 
+========================================== 
+================ Project Stop Log ================ 
+Stop Time: 2025/04/11 周五  1:09:23.54 
+[Step 1] Attempting to close backend service window... 
+
+信息: 没有运行的带有指定标准的任务。
+Backend service window closed successfully. 
+[Step 2] Checking for processes listening on port 3000 and attempting to close them... 
+[Step 3] Project stop operations completed. 
+================ 项目启动日志 ================ 
+启动时间: 2025/04/11 周五  1:09:36.48 
+[步骤1] 正在检查 Node.js 环境... 
+Node.js 环境正常 
+[步骤2] 正在检查依赖... 
+已检测到依赖，跳过安装 
+[步骤3] 正在启动后端服务... 
+后端服务启动命令已发送 
+[步骤4] 等待 5 秒确保服务正常启动... 
+[步骤5] 检查 ADB 状态... 
+Android Debug Bridge version 1.0.41
+Version 35.0.2-12147458
+Installed as C:\platform-tools\scrcpy-win64-v3.2\adb.exe
+Running on Windows 10.0.22631
+ADB 正常可用 
+[步骤6] 正在打开系统主页 http://localhost:3000 
+浏览器已打开主页 
+========================================== 
+================ 项目启动日志 ================ 
+启动时间: 2025/04/11 周五  1:28:25.57 
+[步骤1] 正在检查 Node.js 环境... 
+Node.js 环境正常 
+[步骤2] 正在检查依赖... 
+已检测到依赖，跳过安装 
+[步骤3] 正在启动后端服务... 
+后端服务启动命令已发送 
+[步骤4] 等待 5 秒确保服务正常启动... 
+[步骤5] 检查 ADB 状态... 
+Android Debug Bridge version 1.0.41
+Version 35.0.2-12147458
+Installed as C:\platform-tools\scrcpy-win64-v3.2\adb.exe
+Running on Windows 10.0.22631
+ADB 正常可用 
+[步骤6] 正在打开系统主页 http://localhost:3000 
+浏览器已打开主页 
+========================================== 
+================ Project Stop Log ================ 
+Stop Time: 2025/04/11 周五  1:30:08.82 
+[Step 1] Attempting to close backend service window... 
+
+信息: 没有运行的带有指定标准的任务。
+Backend service window closed successfully. 
+[Step 2] Checking for processes listening on port 3000 and attempting to close them... 
+[Step 3] Project stop operations completed. 
+================ 项目启动日志 ================ 
+启动时间: 2025/04/11 周五  1:30:14.60 
+[步骤1] 正在检查 Node.js 环境... 
+Node.js 环境正常 
+[步骤2] 正在检查依赖... 
+已检测到依赖，跳过安装 
+[步骤3] 正在启动后端服务... 
+后端服务启动命令已发送 
+[步骤4] 等待 5 秒确保服务正常启动... 
+[步骤5] 检查 ADB 状态... 
+Android Debug Bridge version 1.0.41
+Version 35.0.2-12147458
+Installed as C:\platform-tools\scrcpy-win64-v3.2\adb.exe
+Running on Windows 10.0.22631
+ADB 正常可用 
+[步骤6] 正在打开系统主页 http://localhost:3000 
+浏览器已打开主页 
+========================================== 
+================ 项目启动日志 ================ 
+启动时间: 2025/04/11 周五  1:58:19.73 
+[步骤1] 正在检查 Node.js 环境... 
+Node.js 环境正常 
+[步骤2] 正在检查依赖... 
+已检测到依赖，跳过安装 
+[步骤3] 正在启动后端服务... 
+后端服务启动命令已发送 
+[步骤4] 等待 5 秒确保服务正常启动... 
+[步骤5] 检查 ADB 状态... 
+Android Debug Bridge version 1.0.41
+Version 35.0.2-12147458
+Installed as C:\platform-tools\scrcpy-win64-v3.2\adb.exe
+Running on Windows 10.0.22631
+ADB 正常可用 
+[步骤6] 正在打开系统主页 http://localhost:3000 
+浏览器已打开主页 
+========================================== 
+================ Project Stop Log ================ 
+Stop Time: 2025/04/11 周五  2:02:18.82 
+[Step 1] Attempting to close backend service window... 
+
+信息: 没有运行的带有指定标准的任务。
+Backend service window closed successfully. 
+[Step 2] Checking for processes listening on port 3000 and attempting to close them... 
+[Step 3] Project stop operations completed. 
+================ 项目启动日志 ================ 
+启动时间: 2025/04/11 周五  2:02:22.93 
+[步骤1] 正在检查 Node.js 环境... 
+Node.js 环境正常 
+[步骤2] 正在检查依赖... 
+已检测到依赖，跳过安装 
+[步骤3] 正在启动后端服务... 
+后端服务启动命令已发送 
+[步骤4] 等待 5 秒确保服务正常启动... 
+[步骤5] 检查 ADB 状态... 
+Android Debug Bridge version 1.0.41
+Version 35.0.2-12147458
+Installed as C:\platform-tools\scrcpy-win64-v3.2\adb.exe
+Running on Windows 10.0.22631
+ADB 正常可用 
+[步骤6] 正在打开系统主页 http://localhost:3000 
+浏览器已打开主页 
+========================================== 
+================ Project Stop Log ================ 
+Stop Time: 2025/04/11 周五  2:05:39.29 
+[Step 1] Attempting to close backend service window... 
+
+信息: 没有运行的带有指定标准的任务。
+Backend service window closed successfully. 
+[Step 2] Checking for processes listening on port 3000 and attempting to close them... 
+[Step 3] Project stop operations completed. 
+================ 项目启动日志 ================ 
+启动时间: 2025/04/11 周五  2:11:38.83 
+[步骤1] 正在检查 Node.js 环境... 
+Node.js 环境正常 
+[步骤2] 正在检查依赖... 
+已检测到依赖，跳过安装 
+[步骤3] 正在启动后端服务... 
+后端服务启动命令已发送 
+[步骤4] 等待 5 秒确保服务正常启动... 
+[步骤5] 检查 ADB 状态... 
+Android Debug Bridge version 1.0.41
+Version 35.0.2-12147458
+Installed as C:\platform-tools\scrcpy-win64-v3.2\adb.exe
+Running on Windows 10.0.22631
+ADB 正常可用 
+[步骤6] 正在打开系统主页 http://localhost:3000 
+浏览器已打开主页 
+========================================== 
+================ Project Stop Log ================ 
+Stop Time: 2025/04/11 周五  2:25:41.92 
+[Step 1] Attempting to close backend service window... 
+
+信息: 没有运行的带有指定标准的任务。
+Backend service window closed successfully. 
+[Step 2] Checking for processes listening on port 3000 and attempting to close them... 
+[Step 3] Project stop operations completed. 
+================ 项目启动日志 ================ 
+启动时间: 2025/04/11 周五  2:25:45.53 
+[步骤1] 正在检查 Node.js 环境... 
+Node.js 环境正常 
+[步骤2] 正在检查依赖... 
+已检测到依赖，跳过安装 
+[步骤3] 正在启动后端服务... 
+后端服务启动命令已发送 
+[步骤4] 等待 5 秒确保服务正常启动... 
+[步骤5] 检查 ADB 状态... 
+Android Debug Bridge version 1.0.41
+Version 35.0.2-12147458
+Installed as C:\platform-tools\scrcpy-win64-v3.2\adb.exe
+Running on Windows 10.0.22631
+ADB 正常可用 
+[步骤6] 正在打开系统主页 http://localhost:3000 
+浏览器已打开主页 
+========================================== 
+================ Project Stop Log ================ 
+Stop Time: 2025/04/11 周五  2:37:28.75 
+[Step 1] Attempting to close backend service window... 
+
+信息: 没有运行的带有指定标准的任务。
+Backend service window closed successfully. 
+[Step 2] Checking for processes listening on port 3000 and attempting to close them... 
+[Step 3] Project stop operations completed. 
+================ 项目启动日志 ================ 
+启动时间: 2025/04/11 周五  2:37:33.19 
+[步骤1] 正在检查 Node.js 环境... 
+Node.js 环境正常 
+[步骤2] 正在检查依赖... 
+已检测到依赖，跳过安装 
+[步骤3] 正在启动后端服务... 
+后端服务启动命令已发送 
+[步骤4] 等待 5 秒确保服务正常启动... 
+[步骤5] 检查 ADB 状态... 
+Android Debug Bridge version 1.0.41
+Version 35.0.2-12147458
+Installed as C:\platform-tools\scrcpy-win64-v3.2\adb.exe
+Running on Windows 10.0.22631
+ADB 正常可用 
+[步骤6] 正在打开系统主页 http://localhost:3000 
+浏览器已打开主页 
+========================================== 
+================ Project Stop Log ================ 
+Stop Time: 2025/04/11 周五  2:38:38.85 
+[Step 1] Attempting to close backend service window... 
+
+信息: 没有运行的带有指定标准的任务。
+Backend service window closed successfully. 
+[Step 2] Checking for processes listening on port 3000 and attempting to close them... 
+[Step 3] Project stop operations completed. 
+================ 项目启动日志 ================ 
+启动时间: 2025/04/11 周五  2:38:42.64 
+[步骤1] 正在检查 Node.js 环境... 
+Node.js 环境正常 
+[步骤2] 正在检查依赖... 
+已检测到依赖，跳过安装 
+[步骤3] 正在启动后端服务... 
+后端服务启动命令已发送 
+[步骤4] 等待 5 秒确保服务正常启动... 
+[步骤5] 检查 ADB 状态... 
+Android Debug Bridge version 1.0.41
+Version 35.0.2-12147458
+Installed as C:\platform-tools\scrcpy-win64-v3.2\adb.exe
+Running on Windows 10.0.22631
+ADB 正常可用 
+[步骤6] 正在打开系统主页 http://localhost:3000 
+浏览器已打开主页 
+========================================== 

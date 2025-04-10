@@ -1,0 +1,239 @@
+// 后端/server.js
+// 导入所需模块
+const express = require('express');
+const multer  = require('multer');
+const path = require('path');
+const os = require('os');
+const { exec } = require('child_process');
+
+// 配置上传目录及上传组件（后续APK文件上传）
+const upload = multer({ dest: path.join(__dirname, 'uploads') });
+
+const app = express();
+const port = 3000;
+
+// 设置静态文件目录，提供前端资源
+app.use(express.static(path.join(__dirname, '../前端')));
+
+// --------------------- API 接口区域 ---------------------
+
+// 1. 获取本机局域网IP地址（自动获取）
+app.get('/api/ip', (req, res) => {
+  // 遍历网络接口，查找非内网127.0.0.1的IPv4地址
+  const interfaces = os.networkInterfaces();
+  let ipAddress = '无法获取IP';
+  for (let iface in interfaces) {
+    for (let i = 0; i < interfaces[iface].length; i++) {
+      const addr = interfaces[iface][i];
+      if (addr.family === 'IPv4' && !addr.internal) {
+        ipAddress = addr.address;
+        break;
+      }
+    }
+    if(ipAddress !== '无法获取IP') break;
+  }
+  res.json({ ip: ipAddress });
+});
+
+// 2. 局域网设备扫描（示例：利用 arp 命令获取当前局域网连接设备）
+// 注意：此方法仅作为示例，后续可替换为更高级的局域网扫描模块
+app.get('/api/scan', (req, res) => {
+  // 调用 Windows 命令 arp -a 获取ARP表中存在的IP地址信息
+  exec('arp -a', (error, stdout, stderr) => {
+    if (error) {
+      console.error(`扫描局域网失败: ${error.message}`);
+      return res.status(500).json({ error: '扫描局域网失败' });
+    }
+    // 简单解析ip地址列表，此处后续可使用正则表达式进一步提取设备名称、型号等信息
+    const devices = stdout.split('\n')
+      .filter(line => line.includes('.'))
+      .map(line => {
+        const parts = line.trim().split(/\s+/);
+        return {
+          ip: parts[0],
+          // 设备名称、型号等详细信息目前无法获得，预留字段
+          name: '未知设备',
+          model: '未知型号'
+        };
+      });
+    res.json({ devices });
+  });
+});
+
+// 3. 获取已开启adb的设备列表（调用adb devices命令）
+app.get('/api/adbDevices', (req, res) => {
+  // adb.exe 命令路径需要设置为已安装adb的完整路径
+  const adbPath = 'C:\\platform-tools\\scrcpy-win64-v3.2\\adb.exe';
+  exec(`"${adbPath}" devices`, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`获取adb设备失败: ${error.message}`);
+      return res.status(500).json({ error: '获取adb设备失败' });
+    }
+    const lines = stdout.split('\n');
+    let devices = [];
+    lines.forEach(line => {
+      if (line.trim().endsWith('device') && !line.includes('List of devices')) {
+        const parts = line.trim().split(/\s+/);
+        devices.push({ serial: parts[0] });
+      }
+    });
+    res.json({ adbDevices: devices });
+  });
+});
+
+// 4. ADB设备连接，一键连接指定设备（通过传入设备IP或序列号）
+app.get('/api/adbConnect', (req, res) => {
+  const device = req.query.device;
+  if (!device) {
+    return res.status(400).json({ error: '缺少 device 参数' });
+  }
+  // adb connect 命令示例
+  const adbPath = 'C:\\platform-tools\\scrcpy-win64-v3.2\\adb.exe';
+  exec(`"${adbPath}" connect ${device}`, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`连接设备失败: ${error.message}`);
+      return res.status(500).json({ error: '连接设备失败' });
+    }
+    res.json({ message: stdout.trim() });
+  });
+});
+
+// 5. 模拟遥控器按键控制（确认、返回、音量、频道、数字按钮等）
+// 前端通过query参数传入控制指令，后端转成adb shell命令发送到设备
+app.get('/api/control', (req, res) => {
+  const key = req.query.key;
+  if (!key) {
+    return res.status(400).json({ error: '缺少 key 参数' });
+  }
+  // 映射按键对应adb shell keyevent命令，部分示例：
+  const keyMap = {
+    '确认': '66',       // KEYCODE_ENTER
+    '返回': '4',        // KEYCODE_BACK
+    '音量加': '24',     // KEYCODE_VOLUME_UP
+    '音量减': '25',     // KEYCODE_VOLUME_DOWN
+    '频道加': '166',    // 示例键值，具体按设备而定
+    '频道减': '167',    // 示例键值
+    // 数字按键“0”-“9”
+    '0': '7',
+    '1': '8',
+    '2': '9',
+    '3': '10',
+    '4': '11',
+    '5': '12',
+    '6': '13',
+    '7': '14',
+    '8': '15',
+    '9': '16'
+  };
+  let keyCode = keyMap[key];
+  if (!keyCode) {
+    return res.status(400).json({ error: '无效的按键' });
+  }
+  // adb shell input keyevent 命令（此处默认操作第一个设备，如需指定设备，请扩展接口参数）
+  const adbPath = 'C:\\platform-tools\\scrcpy-win64-v3.2\\adb.exe';
+  exec(`"${adbPath}" shell input keyevent ${keyCode}`, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`控制指令发送失败: ${error.message}`);
+      return res.status(500).json({ error: '控制指令发送失败' });
+    }
+    res.json({ message: '发送成功' });
+  });
+});
+
+// 6. 文件上传、APK安装与卸载
+// 6.1 文件上传：接收上传的文件，后续根据上传类型进行安装等操作
+app.post('/api/upload', upload.single('file'), (req, res) => {
+  // TODO: 根据文件后缀判断是否为APK，可加入更多文件处理逻辑
+  console.log('文件已上传至: ', req.file.path);
+  res.json({ message: '文件上传成功', filePath: req.file.path });
+});
+
+// 6.2 安装APK（传入APK文件路径）
+app.post('/api/installApk', express.json(), (req, res) => {
+  const apkPath = req.body.apkPath;
+  if (!apkPath) {
+    return res.status(400).json({ error: '缺少apkPath参数' });
+  }
+  const adbPath = 'C:\\platform-tools\\scrcpy-win64-v3.2\\adb.exe';
+  exec(`"${adbPath}" install "${apkPath}"`, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`APK安装失败: ${error.message}`);
+      return res.status(500).json({ error: 'APK安装失败' });
+    }
+    res.json({ message: stdout.trim() });
+  });
+});
+
+// 6.3 卸载APK（传入包名）
+app.post('/api/uninstallApk', express.json(), (req, res) => {
+  const packageName = req.body.packageName;
+  if (!packageName) {
+    return res.status(400).json({ error: '缺少packageName参数' });
+  }
+  const adbPath = 'C:\\platform-tools\\scrcpy-win64-v3.2\\adb.exe';
+  exec(`"${adbPath}" uninstall ${packageName}`, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`APK卸载失败: ${error.message}`);
+      return res.status(500).json({ error: 'APK卸载失败' });
+    }
+    res.json({ message: stdout.trim() });
+  });
+});
+
+// 7. 远程剪贴板：复制本地内容至设备
+app.post('/api/clipboard', express.json(), (req, res) => {
+  const text = req.body.text;
+  if (!text) {
+    return res.status(400).json({ error: '缺少text参数' });
+  }
+  // 此处示例：将文本保存到文件后，通过adb推送到设备指定位置，后续可扩展为真正的剪贴板操作
+  const tmpFile = path.join(__dirname, 'clipboard.txt');
+  const fs = require('fs');
+  fs.writeFile(tmpFile, text, (err) => {
+    if (err) {
+      console.error('写入剪贴板文件失败');
+      return res.status(500).json({ error: '写入剪贴板文件失败' });
+    }
+    const adbPath = 'C:\\platform-tools\\scrcpy-win64-v3.2\\adb.exe';
+    // 将文本文件推送到设备 /sdcard/clipboard.txt，此处仅为示例
+    exec(`"${adbPath}" push "${tmpFile}" /sdcard/clipboard.txt`, (error, stdout, stderr) => {
+      if (error) {
+        console.error(`推送剪贴板内容失败: ${error.message}`);
+        return res.status(500).json({ error: '推送剪贴板内容失败' });
+      }
+      res.json({ message: '剪贴板内容已复制到设备' });
+    });
+  });
+});
+
+// 8. 已连接设备监控画面（简单示例：获取当前设备屏幕截图）
+// 8.1 打开监控：获取截图后返回图片数据（实际中可结合WebSocket实时刷新）
+app.get('/api/monitor', (req, res) => {
+  // 利用adb截屏命令，并把截图以base64格式返回
+  const adbPath = 'C:\\platform-tools\\scrcpy-win64-v3.2\\adb.exe';
+  // 执行adb截屏，保存到临时文件后读取（此方法简单，后续可使用更高效方案）
+  const tmpImg = path.join(__dirname, 'screen.png');
+  exec(`"${adbPath}" exec-out screencap -p > "${tmpImg}"`, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`获取屏幕截图失败: ${error.message}`);
+      return res.status(500).json({ error: '获取屏幕截图失败' });
+    }
+    // 读取文件并以base64编码返回
+    const fs = require('fs');
+    fs.readFile(tmpImg, { encoding: 'base64' }, (err, data) => {
+      if (err) {
+        console.error('读取截图失败');
+        return res.status(500).json({ error: '读取截图失败' });
+      }
+      res.json({ image: data });
+    });
+  });
+});
+
+// --------------------- 预留后期扩展接口区域 ---------------------
+// TODO: 后续新增其它功能的接口，例如双向视频通话、复杂命令序列操作等
+
+// 启动后端服务
+app.listen(port, () => {
+  console.log(`后端服务已启动，访问地址：http://localhost:${port}`);
+});

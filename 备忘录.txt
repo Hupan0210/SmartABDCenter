@@ -1,0 +1,6 @@
+ Nginx  路径：C:\nginx-rtmp-win32-1.2.1\nginx.exe
+C:\nginx-rtmp-win32-1.2.1\conf\nginx.conf
+ADB Server路径：C:\platform-tools\scrcpy-win64-v3.2\adb.exe
+OBS路径：C:\Program Files\obs-studio\bin\64bit\obs64.exe
+
+要确保路径正确
